@@ -5,25 +5,38 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
 </head>
 <body>
 
   <div class="navbar navbar-default">
     <div class="container">
       <div class="navbar-header">
-        <%= link_to "Message Board", root_path, class: "navbar-brand" %>
+
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+        <%= link_to raw('<span class="fa fa-pencil-square-o"></span>
+Message Board'), root_path, class: "navbar-brand" %>
       </div>
+
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
       <ul class="nav navbar-nav">
-        <li><%= link_to "Sign Up", new_user_registration_path %></li>
         <% if user_signed_in? %>
+         <li><%= link_to "New Message", new_message_path, class: 'btn btn-success' %></li>
             <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
           <% else %>
           <li><%= link_to "Log In", new_user_session_path %></li>
+          <li><%= link_to "Sign Up", new_user_registration_path %></li>
           <% end %>
       </ul>
-      <% if user_signed_in? %>
-        <p><%= link_to "New Message", new_message_path, class: "navbar-right navbar-text navbar-link" %></p>
-      <% end %>
     </div>
   </div>
 
