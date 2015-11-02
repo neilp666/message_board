@@ -1,4 +1,8 @@
 <h2><%= @message.title %></h2>
+
+<p>Posted by <%= @message.user.email %> <%= time_ago_in_words (@message.created_at) %></p>
+
+
 <p><%= @message.description %></p>
 
 <h3>Comments:</h3>
@@ -9,7 +13,11 @@
 
 
   <%= link_to "Back", root_path %>
-  <%= link_to "Edit", edit_message_path(@message) %>
-  <%= link_to "Delete", message_path(@message), method: :delete, data: { confirm: "Are you Sure?" } %>
+  <% if user_signed_in? %>
+    <% if @message.user_id == current_user.id %>
+    <%= link_to "Edit", edit_message_path(@message) %>
+    <%= link_to "Delete", message_path(@message), method: :delete, data: { confirm: "Are you Sure?" } %>
+    <% end %>
+  <% end %>
   
 
