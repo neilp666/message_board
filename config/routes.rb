@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
 
   devise_for :users
-  resources :messages  #urls for messages.
+  resources :messages do
+    resources :comments  #urls for messages.
+  end
   root  'messages#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
